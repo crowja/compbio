@@ -6,7 +6,8 @@ Read a file or stream of sequences in FASTA format:
     char       *h, *s;
      . . .
     while (fareader_next(r, &h, &s)) {
-       printf("seq is %s\n", s);
+       printf("seq desc is %s\n", h);
+       printf("seq text is %s\n", s);
     }
      . . .
     fareader_free(r);
