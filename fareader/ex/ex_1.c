@@ -6,9 +6,9 @@ int
 main(int argc, char *argv[])
 {
    struct fareader *r = fareader_new(NULL);
-   char *h, *s;
+   char       *h, *s;
 
-   while ( fareader_next(r, &h, &s)) {
+   while (fareader_next(r, &h, &s)) {
       printf("seq is %s\n", s);
    }
 
