@@ -1,7 +1,7 @@
 /**
  *  @file fareader.h
  *  @version 0.3.0-dev0
- *  @date Sat Nov 16 09:48:54 CST 2019
+ *  @date Tue Nov 19 21:45:47 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -19,23 +19,33 @@ struct fareader;
 
 /**
  *  @brief Create and return a new fareader object.
- *  @details FIXME longer description here ...
+ *  @param fname Filename to read from, stdin if NULL.
  */
 struct fareader *fareader_new(char *fname);
 
 /**
- *  @brief Clean up and free a fareader structure.
- *  @details FIXME longer description here ...
+ *  @brief Clean up and free an fareader structure.
+ *  @param p Pointer to an fareader object.
  */
 void        fareader_free(struct fareader *p);
 
 /**
- *  TODO
+ *  @brief Extend the internal read buffer size.
+ *  @details There is an internal read buffer, a varstr, for the sequence text
+ *  with default size and extension. fareader_bufferesize() provides a way to
+ *  modify this directly.
+ *  @param p Pointer to an fareader object.
+ *  @param size Size of read buffer, if possible.
+ *  @param extend Additive length of extension of the buffer.
  */
 int         fareader_buffersize(struct fareader *p, unsigned size, unsigned extend);
 
 /**
- *  TODO
+ * @brief Return the next sequence.
+ * @details Return the next sequence from the stream opened by the constructor.
+ * @param p Pointer to an fareader object.
+ * @param h Pointer to a string representing the FASTA header.
+ * @param s Pointer to a string representing the sequence text.
  */
 int         fareader_next(struct fareader *p, char **h, char **s);
 
