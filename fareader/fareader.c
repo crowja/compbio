@@ -1,6 +1,6 @@
 /**
  *  @file fareader.c
- *  @version 0.2.0-dev0
+ *  @version 0.3.0-dev0
  *  @date Sat Nov 16 09:48:54 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
@@ -30,7 +30,7 @@
 #endif
 #define _FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
-static const char version[] = "0.2.0-dev0";
+static const char version[] = "0.3.0-dev0";
 
 enum states { s_at_start, s_at_end, s_in_h, s_in_h_eol, s_in_s, s_in_s_eol };
 
