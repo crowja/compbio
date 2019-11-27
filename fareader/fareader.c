@@ -15,7 +15,15 @@
 #include <string.h>
 #include <ctype.h>
 #include "varstr.h"
+#ifdef   HAVE_ZLIB
 #include "zlib.h"
+#else
+typedef FILE *gzFile;
+#define  gzdopen(a, b) fdopen((a), (b))
+#define  gzopen(a, b)  fopen((a), (b))
+#define  gzclose(a)    fclose((a))
+#define  gzgetc(a)     getc((a))
+#endif
 #include "fareader.h"
 
 #define  DEBUG         0
@@ -58,7 +66,9 @@ fareader_new(char *fname)
    else
       tp->in = gzopen(fname, "r");
 
+#ifdef   HAVE_ZLIB
    gzbuffer(tp->in, 1024 * 32);                  /* requires at least zlib-1.2.4 */
+#endif
 
    tp->h = varstr_new();
    varstr_extend(tp->h, 1024);
