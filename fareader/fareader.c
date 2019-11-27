@@ -1,6 +1,6 @@
 /**
  *  @file fareader.c
- *  @version 0.4.0-dev0
+ *  @version 0.5.0-dev0
  *  @date Tue Nov 19 21:45:47 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
@@ -38,7 +38,7 @@ typedef FILE *gzFile;
 #endif
 #define _FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
-static const char version[] = "0.4.0-dev0";
+static const char version[] = "0.5.0-dev0";
 
 enum states { s_at_start, s_at_end, s_in_h, s_in_h_eol, s_in_s, s_in_s_eol };
 
