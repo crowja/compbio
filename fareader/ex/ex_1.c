@@ -7,10 +7,12 @@ main(int argc, char *argv[])
 {
    struct fareader *r = fareader_new(NULL); /* from stdin */
    char       *h, *s;
+   unsigned    count = 1;
 
    while (fareader_next(r, &h, &s)) {
-      printf("seq desc is %s\n", h);
-      printf("seq text is %s\n", s);
+      printf("seq %d desc is %s\n", count, h);
+      printf("seq %d text is %s\n", count, s);
+      count += 1;
    }
 
    fareader_free(r);
