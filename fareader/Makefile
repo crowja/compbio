@@ -63,7 +63,7 @@ echeck: fareader.o varstr.o
 	  && ( LD_PRELOAD=libefence.so ./t/a.out ); \
 	done 
 
-indent:
+indent: stamp
 	@indent $(INDENT_FLAGS) fareader.c
 	@indent $(INDENT_FLAGS) fareader.h
 	@indent $(INDENT_FLAGS) t/test.c

@@ -1,7 +1,7 @@
 /**
  *  @file fareader.c
  *  @version 0.5.0-dev0
- *  @date Tue Nov 19 21:45:47 CST 2019
+ *  @date Wed Nov 27 21:51:37 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -115,7 +115,7 @@ int
 fareader_next(struct fareader *p, char **h, char **s)
 {
    unsigned    rc = 1;
-   char        c;
+   int         c;
 
    varstr_empty(p->h);
    varstr_empty(p->s);
