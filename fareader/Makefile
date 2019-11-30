@@ -3,7 +3,7 @@ SHELL = /bin/sh
 GCC_STRICT_FLAGS = -pedantic -ansi -W -Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -O2
 OTHER_SOURCE =
 OTHER_INCLUDE = -I.
-CPPFLAGS = -I. $(OTHER_INCLUDE) -DHAVE_ZLIB
+CPPFLAGS = -I. $(OTHER_INCLUDE) -DHAVE_ZLIB -DDEBUG
 CFLAGS = $(GCC_STRICT_FLAGS) 
 LDFLAGS = -lz
 LDFLAGS_EFENCE = -L/usr/local/lib -lefence $(LDFLAGS)
@@ -40,7 +40,7 @@ check-examples: fareader.o varstr.o
 	  echo "Running example $$i ..."; \
 	  ( $(CC) -g $(CPPFLAGS) $(OTHER_INCLUDE) $(CFLAGS) $(OTHER_SOURCE) \
 		-o ex/a.out $$i.c fareader.o varstr.o $(LDFLAGS) ) \
-	  && ( valgrind $(VALGRIND_FLAGS) ex/a.out < ex/sequence.fasta.gz ); \
+	  && ( valgrind $(VALGRIND_FLAGS) ex/a.out < ex/sequence.fasta ); \
 	done 
 
 vcheck: fareader.o varstr.o

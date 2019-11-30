@@ -1,7 +1,7 @@
 /**
  *  @file fareader.c
  *  @version 0.5.0-dev0
- *  @date Thu Nov 28 10:47:02 CST 2019
+ *  @date Sat Nov 30 12:06:28 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -26,7 +26,11 @@ typedef FILE *gzFile;
 #endif
 #include "fareader.h"
 
-#define  DEBUG         0
+#ifdef  DEBUG
+#define DEBUG_printf(args) printf args
+#else
+#define DEBUG_printf(args)
+#endif
 
 #ifdef  _IS_NULL
 #undef  _IS_NULL
@@ -74,6 +78,7 @@ fareader_new(char *fname)
    varstr_extend(tp->h, 1024);
    tp->s = varstr_new();
    varstr_extend(tp->s, 1024);
+   /* varstr_buffersize(tp->s, 1024 * 1024, 1024 * 1024); */
    tp->state = s_at_start;
 
    return tp;
@@ -129,15 +134,15 @@ fareader_next(struct fareader *p, char **h, char **s)
 
          case s_at_start:
             if (isspace(c)) {
-               DEBUG && printf("MADE IT TO s_at_start\t1\n");
+               DEBUG_printf(("MADE IT TO s_at_start\t1\n"));
                continue;
             }
             else if (c == '>' || c == ';') {
-               DEBUG && printf("MADE IT TO s_at_start\t2\n");
+               DEBUG_printf(("MADE IT TO s_at_start\t2\n"));
                p->state = s_in_h;
             }
             else {
-               DEBUG && printf("MADE IT TO s_at_start\t3\n");
+               DEBUG_printf(("MADE IT TO s_at_start\t3\n"));
                varstr_catc(p->s, c);
                p->state = s_in_s;
             }
@@ -145,28 +150,28 @@ fareader_next(struct fareader *p, char **h, char **s)
 
          case s_in_h:
             if (c == '\n') {
-               DEBUG && printf("MADE IT TO s_in_h\t1\n");
+               DEBUG_printf(("MADE IT TO s_in_h\t1\n"));
                p->state = s_in_h_eol;
             }
             else {
-               DEBUG && printf("MADE IT TO s_in_h\t2\n");
+               DEBUG_printf(("MADE IT TO s_in_h\t2\n"));
                varstr_catc(p->h, c);
             }
             break;
 
          case s_in_h_eol:
             if (isspace(c)) {
-               DEBUG && printf("MADE IT TO s_in_h_eol\t1\n");
+               DEBUG_printf(("MADE IT TO s_in_h_eol\t1\n"));
                continue;
             }
             else if (c == '>' || c == ';') {
-               DEBUG && printf("MADE IT TO s_in_h_eol\t2\n");
+               DEBUG_printf(("MADE IT TO s_in_h_eol\t2\n"));
                p->state = s_in_h;                /* and emit FIXME */
                varstr_empty(p->h);
                varstr_empty(p->s);
             }
             else {
-               DEBUG && printf("MADE IT TO s_in_h_eol\t3\n");
+               DEBUG_printf(("MADE IT TO s_in_h_eol\t3\n"));
                varstr_catc(p->s, c);
                p->state = s_in_s;
             }
@@ -174,31 +179,31 @@ fareader_next(struct fareader *p, char **h, char **s)
 
          case s_in_s:
             if (c == '\n') {
-               DEBUG && printf("MADE IT TO s_in_s\t1\n");
+               DEBUG_printf(("MADE IT TO s_in_s\t1\n"));
                p->state = s_in_s_eol;
             }
             else if (isspace(c)) {
-               DEBUG && printf("MADE IT TO s_in_s\t2\n");
+               DEBUG_printf(("MADE IT TO s_in_s\t2\n"));
                continue;
             }
             else {
-               DEBUG && printf("MADE IT TO s_in_s\t2\n");
+               DEBUG_printf(("MADE IT TO s_in_s\t2 with %c\n", c));
                varstr_catc(p->s, c);
             }
             break;
 
          case s_in_s_eol:
             if (isspace(c)) {
-               DEBUG && printf("MADE IT TO s_in_s_eol\t1\n");
+               DEBUG_printf(("MADE IT TO s_in_s_eol\t1\n"));
                continue;
             }
             else if (c == '>' || c == ';') {
-               DEBUG && printf("MADE IT TO s_in_s_eol\t2\n");
+               DEBUG_printf(("MADE IT TO s_in_s_eol\t2\n"));
                p->state = s_in_h;
                goto DONE;
             }
             else {
-               DEBUG && printf("MADE IT TO s_in_s_eol\t3\n");
+               DEBUG_printf(("MADE IT TO s_in_s_eol\t3\n"));
                varstr_catc(p->s, c);
                p->state = s_in_s;
             }
