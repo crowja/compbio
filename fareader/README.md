@@ -16,4 +16,4 @@ Input can be from stdin or from a file. And in either case the input can be gzip
 compressed, so there is no need to uncompress a file or stream explicitly before
 using it. This is thanks to the magical magic of **zlib** http://zlib.net of
 Jean-Loup Gailly and Mark Adler. Additional thanks to @joewalnes for his
-**tinytest** (unit test framework)[https://github.com/joewalnes/tinytest].
+**tinytest** [unit test framework](https://github.com/joewalnes/tinytest).
