@@ -1,7 +1,7 @@
 /**
  *  @file fqreader.h
  *  @version 0.1.1-dev0
- *  @date Sat Nov 30 20:30:06 CST 2019
+ *  @date Sat Nov 30 22:09:45 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME

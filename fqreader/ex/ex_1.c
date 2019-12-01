@@ -9,10 +9,10 @@ main(int argc, char *argv[])
    struct fqreader *r = fqreader_new(NULL);
 
    while (fqreader_next(r, &h1, &h2, &s, &t)) {
-      printf("@%s\n", h1);
-      printf("%s\n", s);
-      printf("+%s\n", h2);
-      printf("%s\n", t);
+      printf("Header 1 is    %s\n", h1);
+      printf("Sequence is    %s\n", s);
+      printf("Header 2 is    %s\n", h2);
+      printf("Qualities are: %s\n", t);
    }
 
    fqreader_free(r);
